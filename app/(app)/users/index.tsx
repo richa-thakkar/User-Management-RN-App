@@ -1,7 +1,7 @@
+import { useNavigation } from '@react-navigation/native';
 import * as Network from 'expo-network';
 import { useRouter } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
 import {
   ActivityIndicator,
   Alert,
@@ -17,10 +17,10 @@ import UserCard from '../../../components/UserCard';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useAppHooks';
 import { logout } from '../../../store/authSlice';
 import {
-    deleteUserAsync,
-    fetchUsersAsync,
-    resetUsers,
-    setOffline,
+  deleteUserAsync,
+  fetchUsersAsync,
+  resetUsers,
+  setOffline,
 } from '../../../store/usersSlice';
 import { User } from '../../../types/user';
 
@@ -33,7 +33,8 @@ export default function UsersScreen() {
   );
   const [clientPage, setClientPage] = useState(1);
   const pageSize = 10;
-  const pagerRef = useRef<PagerView | null>(null);
+  const pagerRef = useRef<any>(null);
+  const clientTotalPages = Math.max(1, Math.max(Math.ceil(users.length / pageSize), totalPages || 1));
 
   // Check network & load on mount
   useEffect(() => {
@@ -93,15 +94,24 @@ export default function UsersScreen() {
     if (clientPage > 1) {
       const newPage = clientPage - 1;
       setClientPage(newPage);
-      if (pagerRef.current && (pagerRef.current as any).setPage) (pagerRef.current as any).setPage(newPage - 1);
+      if (pagerRef.current) {
+        const idx = newPage - 1;
+        if (typeof pagerRef.current.setPage === 'function') pagerRef.current.setPage(idx);
+        else if (typeof pagerRef.current.setPageWithoutAnimation === 'function') pagerRef.current.setPageWithoutAnimation(idx);
+      }
     }
   };
 
   const handleNextClientPage = async () => {
     const newPage = clientPage + 1;
-    setClientPage(newPage);
-    if (pagerRef.current && (pagerRef.current as any).setPage) (pagerRef.current as any).setPage(newPage - 1);
+    // Ensure users are loaded for the target page before navigating
     await ensureUsersForClientPage(newPage);
+    setClientPage(newPage);
+    if (pagerRef.current) {
+      const idx = newPage - 1;
+      if (typeof pagerRef.current.setPage === 'function') pagerRef.current.setPage(idx);
+      else if (typeof pagerRef.current.setPageWithoutAnimation === 'function') pagerRef.current.setPageWithoutAnimation(idx);
+    }
   };
 
   const handleDeleteUser = (user: User) => {
@@ -197,7 +207,7 @@ export default function UsersScreen() {
             await ensureUsersForClientPage(newClientPage);
           }}
         >
-          {Array.from({ length: Math.max(1, totalPages) }).map((_, idx) => {
+          {Array.from({ length: clientTotalPages }).map((_, idx) => {
             const pageIdx = idx + 1;
             const pageData = users.slice((pageIdx - 1) * pageSize, pageIdx * pageSize);
             return (
@@ -229,9 +239,9 @@ export default function UsersScreen() {
           <Text style={styles.pageButtonText}>Previous</Text>
         </TouchableOpacity>
 
-        <Text style={styles.pageInfo}>{`Page ${clientPage} / ${Math.max(1, totalPages)}`}</Text>
+        <Text style={styles.pageInfo}>{`Page ${clientPage} / ${clientTotalPages}`}</Text>
 
-        <TouchableOpacity onPress={handleNextClientPage} disabled={clientPage >= Math.max(1, totalPages) || status === 'loading'} style={[styles.pageButton, clientPage >= Math.max(1, totalPages) && styles.pageButtonDisabled]}>
+        <TouchableOpacity onPress={handleNextClientPage} disabled={clientPage >= clientTotalPages || status === 'loading'} style={[styles.pageButton, clientPage >= clientTotalPages && styles.pageButtonDisabled]}>
           <Text style={styles.pageButtonText}>Next</Text>
         </TouchableOpacity>
       </View>
@@ -343,7 +353,7 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: 'absolute',
-    bottom: '12%',
+    bottom: '10%',
     right: '4%',
     width: 60,
     height: 60,
@@ -368,11 +378,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: '4%',
     borderTopWidth: 1,
     borderTopColor: '#1E293B',
     backgroundColor: '#0F172A',
-    marginBottom: '10%',
+    // marginBottom: '3%',
   },
   pageButton: {
     backgroundColor: '#3B82F6',

@@ -128,10 +128,7 @@ export default function LoginScreen() {
             {!!passwordError && <Text style={styles.errorText}>{passwordError}</Text>}
           </View>
 
-          {/* Hint */}
-          <View style={styles.hint}>
-            <Text style={styles.hintText}>Demo: eve.holt@reqres.in / cityslicka</Text>
-          </View>
+         
 
           {/* Sign In Button */}
           <TouchableOpacity

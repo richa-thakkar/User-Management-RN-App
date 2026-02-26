@@ -29,25 +29,15 @@ A premium, fully-featured user management application built with React Native, E
    - **Email:** `eve.holt@reqres.in`
    - **Password:** `cityslicka`
 
-## Building Production Apps (EAS Build)
+.
 
-You do not need a Mac to build this app for Android or iOS. We use Expo Application Services (EAS) cloud builders.
 
-### Prerequisite
-```bash
-npm install -g eas-cli
-eas login
-```
 
 ### Build Android APK (Free)
 ```bash
 eas build --platform android --profile preview
-```
-Download the resulting `.apk` file from the Expo dashboard and install it directly on any Android device.
 
-### Build iOS Simulator (Free, no Apple Developer account required)
-```bash
-eas build --platform ios --profile preview
+
 ```
 This builds an `.app` directory on an Expo cloud Mac. You can download and drag this into an iOS Simulator on a Mac.
 
