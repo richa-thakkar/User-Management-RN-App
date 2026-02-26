@@ -1,50 +1,63 @@
-# Welcome to your Expo app 👋
+# React Native User Management App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A premium, fully-featured user management application built with React Native, Expo, Redux Toolkit, and Tailwind-inspired custom vanilla CSS styling.
 
-## Get started
+## Features Included
 
-1. Install dependencies
+- **Core Functionality**: Login, View Paginated Users, View User Detail, Add User, Edit User, Delete User.
+- **Bonus: Image Upload**: Uses `expo-image-picker` to select an avatar from the device gallery when creating or editing a user.
+- **Bonus: Offline Caching**: Uses `@react-native-async-storage/async-storage` and `expo-network` to cache the user list for offline viewing.
+- **Bonus: Unit Testing**: Includes Jest tests for Redux slices.
+- **Architecture**: Redux Toolkit (State), React Navigation / Expo Router (Routing), Axios via `reqres.in` API.
 
+## Setup & Running Locally
+
+1. **Install dependencies:**
    ```bash
    npm install
    ```
-
-2. Start the app
-
+2. **Start the development server:**
    ```bash
    npx expo start
    ```
+3. **Run on a physical phone (Free & Recommended):**
+   - Download the **Expo Go** app from the iOS App Store or Android Play Store.
+   - Scan the QR code shown in your terminal with your phone's camera (iOS) or the Expo Go app itself (Android).
+   - This works instantly for both iPhone and Android, without needing a Mac or Android Studio!
 
-In the output, you'll find options to open the app in a
+4. **Testing Credentials:**
+   - **Email:** `eve.holt@reqres.in`
+   - **Password:** `cityslicka`
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Building Production Apps (EAS Build)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+You do not need a Mac to build this app for Android or iOS. We use Expo Application Services (EAS) cloud builders.
 
-## Get a fresh project
-
-When you're ready, run:
-
+### Prerequisite
 ```bash
-npm run reset-project
+npm install -g eas-cli
+eas login
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Build Android APK (Free)
+```bash
+eas build --platform android --profile preview
+```
+Download the resulting `.apk` file from the Expo dashboard and install it directly on any Android device.
 
-## Learn more
+### Build iOS Simulator (Free, no Apple Developer account required)
+```bash
+eas build --platform ios --profile preview
+```
+This builds an `.app` directory on an Expo cloud Mac. You can download and drag this into an iOS Simulator on a Mac.
 
-To learn more about developing your project with Expo, look at the following resources:
+### Build iOS App Store (.ipa)
+*(Requires a $99/yr Apple Developer Account)*
+```bash
+eas build --platform ios --profile production
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Running Tests
+```bash
+npm run test
+```
