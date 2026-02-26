@@ -5,9 +5,9 @@ A premium, fully-featured user management application built with React Native, E
 ## Features Included
 
 - **Core Functionality**: Login, View Paginated Users, View User Detail, Add User, Edit User, Delete User.
-- **Bonus: Image Upload**: Uses `expo-image-picker` to select an avatar from the device gallery when creating or editing a user.
-- **Bonus: Offline Caching**: Uses `@react-native-async-storage/async-storage` and `expo-network` to cache the user list for offline viewing.
-- **Bonus: Unit Testing**: Includes Jest tests for Redux slices.
+- **Image Upload**: Uses `expo-image-picker` to select an avatar from the device gallery when creating or editing a user.
+- **Offline Caching**: Uses `@react-native-async-storage/async-storage` and `expo-network` to cache the user list for offline viewing.
+- **Unit Testing**: Includes Jest tests for Redux slices.
 - **Architecture**: Redux Toolkit (State), React Navigation / Expo Router (Routing), Axios via `reqres.in` API.
 
 ## Setup & Running Locally
@@ -23,29 +23,17 @@ A premium, fully-featured user management application built with React Native, E
 3. **Run on a physical phone (Free & Recommended):**
    - Download the **Expo Go** app from the iOS App Store or Android Play Store.
    - Scan the QR code shown in your terminal with your phone's camera (iOS) or the Expo Go app itself (Android).
-   - This works instantly for both iPhone and Android, without needing a Mac or Android Studio!
+   
 
 4. **Testing Credentials:**
-   - **Email:** `eve.holt@reqres.in`
-   - **Password:** `cityslicka`
+   - **Email:** `test@gmail.com`
+   - **Password:** `test@123!`
 
 .
 
 
 
-### Build Android APK (Free)
-```bash
-eas build --platform android --profile preview
 
-
-```
-This builds an `.app` directory on an Expo cloud Mac. You can download and drag this into an iOS Simulator on a Mac.
-
-### Build iOS App Store (.ipa)
-*(Requires a $99/yr Apple Developer Account)*
-```bash
-eas build --platform ios --profile production
-```
 
 ## Running Tests
 ```bash

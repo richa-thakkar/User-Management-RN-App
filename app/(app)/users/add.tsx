@@ -17,6 +17,7 @@ import {
 import Toast from 'react-native-toast-message';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useAppHooks';
 import { createUserAsync } from '../../../store/usersSlice';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface FormErrors {
   first_name?: string;
@@ -93,9 +94,10 @@ export default function AddUserScreen() {
 
   return (
     <>
-      <Stack.Screen options={{ title: 'Add User', headerBackTitle: 'Users' }} />
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#0F172A' }}>
+      <Stack.Screen options={{ title: 'Add User', headerBackTitle: 'Users' , }}  />
       <KeyboardAvoidingView
-        style={{ flex: 1, backgroundColor: '#0F172A' }}
+        style={{ flex: 1, backgroundColor: '#0F172A', }}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
         <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
@@ -138,14 +140,7 @@ export default function AddUserScreen() {
               keyboardType="email-address"
               testID="email-input"
             />
-            <Field
-              label="Job Title"
-              value={job}
-              onChange={(v) => { setJob(v); setErrors((e) => ({ ...e, job: undefined })); }}
-              placeholder="Software Engineer"
-              error={errors.job}
-              testID="job-input"
-            />
+            
           </View>
 
           <TouchableOpacity
@@ -163,6 +158,7 @@ export default function AddUserScreen() {
           </TouchableOpacity>
         </ScrollView>
       </KeyboardAvoidingView>
+      </SafeAreaView>
     </>
   );
 }
