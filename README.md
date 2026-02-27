@@ -20,7 +20,7 @@ A premium, fully-featured user management application built with React Native, E
    ```bash
    npx expo start
    ```
-3. **Run on a physical phone (Free & Recommended):**
+3. **Run on a physical phone:**
    - Download the **Expo Go** app from the iOS App Store or Android Play Store.
    - Scan the QR code shown in your terminal with your phone's camera (iOS) or the Expo Go app itself (Android).
    
